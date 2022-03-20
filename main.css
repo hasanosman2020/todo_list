@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300&display=swap');
+
+:root {
+    --primary_colour: #333;
+    --light_colour: #f8f8ff;
+    --success_colour: #5cb85c;
+    --error_colour: #d9534f;
+}
+body {
+    background-color: #eaeef7;
+    color: var(--primary_colour);
+    font-family: 'Titillium Web', sans-serif;
+    height: 100vh;
+    /*padding: 32px;*/
+}
+
+.app {
+    display: grid;
+    grid-template-columns: 255px 1fr;
+    border-radius: 16px;
+    overflow: hidden;
+    height: 100%;
+}
+
