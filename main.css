@@ -224,9 +224,10 @@ align-items: center;
 }
 
 /*Create and edit form*/
+/*
 .edit-todo-form {
 display: none;
-}
+}*/
 .create-todo-form input, .edit-todo-form input, .create-todo-form select, .edit-todo-form select {
 border: 0;
 width: 100%;
@@ -234,7 +235,7 @@ padding: 3px 0;
 font-size: 16px;
 background-color: transparent;
 }
-.create-todo-form input:focus, .edit-todo-form input:foocus, .create-todo-form select:focus, .edit-todo-form select:focus {
+.create-todo-form input:focus, .edit-todo-form input:focus, .create-todo-form select:focus, .edit-todo-form select:focus {
 outline: none;
 }
 .create-todo-form, .edit-todo-form {
