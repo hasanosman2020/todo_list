@@ -224,10 +224,10 @@ align-items: center;
 }
 
 /*Create and edit form*/
-/*
+
 .edit-todo-form {
-display: none;
-}*/
+visibility: hidden;
+}
 .create-todo-form input, .edit-todo-form input, .create-todo-form select, .edit-todo-form select {
 border: 0;
 width: 100%;
