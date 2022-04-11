@@ -1,12 +1,12 @@
 //Selectors for new category form
 
-const newCategoryForm = document.querySelector('data-new-category-form')
+const newCategoryForm = document.querySelector('[data-new-category-form]')
 
-const newCategoryInput = document.querySelector('data-new-category-input')
+const newCategoryInput = document.querySelector('[data-new-category-input]')
 
 //Selectors for new categories container
 
-const categoriesContainer = document.querySelector('data-categories')
+const categoriesContainer = document.querySelector('[data-categories]')
 
 //Local storage keys for the categories
 
@@ -51,14 +51,11 @@ function saveAndRender () {
 }
 
 function save () {
-  localStorage.getItem(
-    LOCAL_STORAGE_CATERGORIES_KEY,
-    JSON.stringify(categories)
-  )
+  localStorage.getItem(LOCAL_STORAGE_CATEGORIES_KEY, JSON.stringify(categories))
 }
 
 function render () {
-  //clearChildElemenets(categoriesContainer)
+  clearChildElements(categoriesContainer)
   renderCategories()
 }
 
@@ -80,4 +77,10 @@ function getRandomHexColour () {
   return `#${hex}`
 }
 
-window.addEventListener('load', render())
+function clearChildElements (element) {
+  while (element.firstChild) {
+    element.removeChild(element.firstChild)
+  }
+}
+
+window.addEventListener('load', render)
