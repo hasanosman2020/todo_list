@@ -1,5 +1,5 @@
 //Selectors for new category form
-
+//Selectors for new category form
 const newCategoryForm = document.querySelector('[data-new-category-form]')
 
 const newCategoryInput = document.querySelector('[data-new-category-input]')
@@ -8,15 +8,27 @@ const newCategoryInput = document.querySelector('[data-new-category-input]')
 
 const categoriesContainer = document.querySelector('[data-categories]')
 
-//Local storage keys for the categories
+//Selectors for new todo form
+const newTodoForm = document.querySelector('[data-new-todo-form]')
+const newTodoSelect = document.querySelector('[data-new-todo-select]')
+const newTodoInput = document.querySelector('[data-new-todo-input]')
+
+//Selectors for todos container
+const todosContainer = document.querySelector('[data-cards]')
+
+//Local storage keys
 
 const LOCAL_STORAGE_CATEGORIES_KEY = 'LOCAL_STORAGE_CATEGORIES_KEY'
+const LOCAL_STORAGE_TODOS_KEY = 'LOCAL_STORAGE_TODOS_KEY'
 
 //Application Data
+
 let categories =
   JSON.parse(localStorage.getItem(LOCAL_STORAGE_CATEGORIES_KEY)) || []
 
-//Listener event to the new category form
+let todos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TODOS_KEY)) || []
+
+//Listener event to the new category form - event: Add Category
 
 newCategoryForm.addEventListener('submit', e => {
   e.preventDefault()
@@ -32,9 +44,12 @@ newCategoryForm.addEventListener('submit', e => {
   if (isCategoryEmpty) {
     alert('Please enter a category')
   }
+
   categories.push({
     _id: Date.now().toString(),
+
     category: category,
+
     color: getRandomHexColour()
   })
 
@@ -43,37 +58,71 @@ newCategoryForm.addEventListener('submit', e => {
   saveAndRender()
 })
 
+//Listener event to the todo form - event: Add Todo
+
+newTodoForm.addEventListener('submit', e => {
+  e.preventDefault()
+
+  todos.push({
+    _id: Date.now().toString,
+    categoryID: newToDoSelect.value,
+    todo: newTodoInput
+  })
+
+  newTodoSelect.value = 'All Categories'
+  newTodoInput.value = ''
+
+  saveAndRender()
+})
+
 //Functions
 
 function saveAndRender () {
   save()
+
   render()
 }
 
 function save () {
-  localStorage.getItem(LOCAL_STORAGE_CATEGORIES_KEY, JSON.stringify(categories))
+  localStorage.setItem(LOCAL_STORAGE_CATEGORIES_KEY, JSON.stringify(categories))
+  localStorage.setItem(LOCAL_STORAGE_TODOS_KEY, JSON.stringify(todos))
 }
 
 function render () {
   clearChildElements(categoriesContainer)
+  clearChildElements(newTodoSelect)
+
   renderCategories()
+  renderFormOptions()
 }
 
 function renderCategories () {
   categoriesContainer.innerHTTML += `<li class="sidebar-item">All Categories</li>`
+
   categories.forEach(({ _id, category, color }) => {
     categoriesContainer.innerHTML += `<li class="sidebar-item" data-category-id=${_id}>
 
-${category}<input type="color" value='color' class="sidebar-colour" />
+  
 
+${category}<input type="color" value='color' class="sidebar-colour" />
 </li>`
   })
 }
 
+function renderFormOptions () {
+  newTodoSelect.innerHTML += `<option value="">All Categories</option>`
+  categories.forEach(({ _id, category }) => {
+    newTodoSelect.innerHTML += `<option value=${_id}>${category}</option>`
+  })
+}
+
 //Helpers
+
 function getRandomHexColour () {
   var hex = Math.round(Math.random() * 0xffffff).toString(16)
+
   while (hex.length < 6) hex = '8' + hex
+
   return `#${hex}`
 }
 
